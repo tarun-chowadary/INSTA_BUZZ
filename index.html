@@ -28,7 +28,9 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <div id="savedCount" class="text-sm text-gray-700">0 saved</div>
+        <button id="viewSaved" class="text-sm text-gray-700 hover:underline">
+          <span id="savedCount">0 saved</span>
+        </button>
         <button id="toggleOnboarding" class="px-3 py-2 rounded-lg bg-white border">Interests</button>
       </div>
     </header>
@@ -140,6 +142,7 @@
     const savedCount = document.getElementById('savedCount');
     const searchInput = document.getElementById('searchInput');
     const editInterestsBtn = document.getElementById('editInterests');
+    const viewSavedBtn = document.getElementById('viewSaved');
 
     // ----- Initialize UI -----
     function renderInterestsGrid() {
@@ -277,6 +280,11 @@
     }
 
     searchInput.oninput = () => renderFeed();
+
+    viewSavedBtn.onclick = () => {
+      const savedSection = document.getElementById('savedSection');
+      savedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     // ----- initial render -----
     renderInterestsGrid();
