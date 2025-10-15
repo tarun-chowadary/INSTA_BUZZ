@@ -5,95 +5,155 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>INSTA BUZZ — Your daily dose</title>
 
-  <!-- Tailwind CDN for quick styling -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    /* small custom styles */
-    .card { transition: box-shadow .12s ease; }
-    .card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    body {
+      background: linear-gradient(to bottom, #fff9e6, #ffffff);
+      min-height: 100vh;
+    }
+    .card {
+      transition: box-shadow .12s ease;
+      border-radius: 1rem;
+    }
+    .card:hover {
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    .logo-box {
+      width: 50px;
+      height: 50px;
+      background-color: #ffc107;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .interest-btn {
+      border-radius: 0.75rem;
+      padding: 1rem;
+      border: 1px solid #dee2e6;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      text-align: left;
+      transition: all 0.2s;
+    }
+    .interest-btn.active {
+      background-color: #fff3cd;
+      border-color: #ffc107;
+    }
+    .interest-btn:hover {
+      transform: translateY(-2px);
+    }
+    .tag {
+      background-color: #f8f9fa;
+      padding: 0.25rem 0.5rem;
+      border-radius: 1rem;
+      font-size: 0.75rem;
+    }
+    .feed-card {
+      border-radius: 0.5rem;
+      padding: 1rem;
+      border: 1px solid #dee2e6;
+      margin-bottom: 1rem;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-b from-yellow-50 to-white min-h-screen font-inter text-gray-900">
+<body>
 
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="container py-4" style="max-width: 960px;">
     <!-- Header -->
-    <header class="flex items-center justify-between mb-6">
-      <div class="flex items-center gap-4">
-        <div class="w-12 h-12 rounded-xl bg-yellow-300 flex items-center justify-center text-2xl font-bold">IB</div>
+    <header class="d-flex justify-content-between align-items-center mb-4">
+      <div class="d-flex align-items-center gap-3">
+        <div class="logo-box">IB</div>
         <div>
-          <div class="text-lg font-semibold">INSTA BUZZ</div>
-          <div class="text-xs text-gray-600">Your daily dose of what you love</div>
+          <div class="fs-5 fw-semibold">INSTA BUZZ</div>
+          <div class="small text-secondary">Your daily dose of what you love</div>
         </div>
       </div>
 
-      <div class="flex items-center gap-3">
-        <button id="viewSaved" class="text-sm text-gray-700 hover:underline">
+      <div class="d-flex align-items-center gap-3">
+        <button id="viewSaved" class="btn btn-link text-decoration-none small">
           <span id="savedCount">0 saved</span>
         </button>
-        <button id="toggleOnboarding" class="px-3 py-2 rounded-lg bg-white border">Interests</button>
+        <button id="toggleOnboarding" class="btn btn-outline-secondary">Interests</button>
       </div>
     </header>
 
     <!-- Onboarding / Interests -->
-    <section id="onboarding" class="bg-white rounded-2xl p-6 shadow-md card">
-      <h2 class="text-2xl font-semibold">Welcome to INSTA BUZZ</h2>
-      <p class="mt-1 text-sm text-gray-600">Select topics you want daily updates about.</p>
+    <section id="onboarding" class="card p-4 shadow-sm mb-4">
+      <h2 class="fs-3 fw-semibold mb-2">Welcome to INSTA BUZZ</h2>
+      <p class="small text-secondary mb-4">Select topics you want daily updates about.</p>
 
-      <div class="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-3" id="interestsGrid">
+      <div class="row g-3 mb-4" id="interestsGrid">
         <!-- interest buttons injected by JS -->
       </div>
 
-      <div class="mt-6 flex justify-end gap-3">
-        <button id="resetInterests" class="px-4 py-2 rounded-lg bg-gray-100 text-sm">Reset</button>
-        <button id="startBtn" class="px-4 py-2 rounded-lg bg-yellow-400 text-sm font-semibold">Continue</button>
+      <div class="d-flex justify-content-end gap-2">
+        <button id="resetInterests" class="btn btn-light">Reset</button>
+        <button id="startBtn" class="btn btn-warning fw-semibold">Continue</button>
       </div>
     </section>
 
     <!-- Home / Feed -->
-    <main id="home" class="hidden mt-6">
-      <div class="bg-white p-4 rounded-2xl shadow-md card">
-        <div class="flex items-center justify-between">
+    <main id="home" class="hidden">
+      <div class="card p-4 shadow-sm mb-4">
+        <div class="d-flex justify-content-between align-items-start mb-4">
           <div>
-            <h3 class="text-lg font-semibold">Today's Buzz</h3>
-            <p id="personalizedFor" class="text-xs text-gray-500">Personalized for: —</p>
+            <h3 class="fs-5 fw-semibold mb-1">Today's Buzz</h3>
+            <p id="personalizedFor" class="small text-secondary mb-0">Personalized for: —</p>
           </div>
 
-          <div class="flex items-center gap-3">
-            <input id="searchInput" placeholder="Search your buzz..." class="px-3 py-2 rounded-lg border border-gray-200" />
-            <button id="editInterests" class="px-3 py-2 rounded-lg bg-gray-100 text-sm">Edit Interests</button>
+          <div class="d-flex align-items-center gap-2">
+            <input id="searchInput" placeholder="Search your buzz..." class="form-control form-control-sm" style="width: 200px;" />
+            <button id="editInterests" class="btn btn-sm btn-light">Edit Interests</button>
           </div>
         </div>
 
-        <div id="feedArea" class="mt-4 space-y-3">
+        <div id="feedArea">
           <!-- feed cards injected by JS -->
         </div>
       </div>
 
-      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-white p-4 rounded-2xl shadow-md card">
-          <h4 class="font-semibold">Upcoming Opportunities</h4>
-          <ul class="mt-3 text-sm text-gray-700 space-y-2" id="oppsList"></ul>
+      <div class="row g-3 mb-4">
+        <div class="col-md-6">
+          <div class="card p-4 shadow-sm">
+            <h4 class="fw-semibold mb-3">Upcoming Opportunities</h4>
+            <ul class="small mb-0" id="oppsList"></ul>
+          </div>
         </div>
 
-        <div class="bg-white p-4 rounded-2xl shadow-md card">
-          <h4 class="font-semibold">Trending</h4>
-          <div id="trendingList" class="mt-3 flex flex-col gap-2 text-sm text-gray-700"></div>
+        <div class="col-md-6">
+          <div class="card p-4 shadow-sm">
+            <h4 class="fw-semibold mb-3">Trending</h4>
+            <div id="trendingList" class="d-flex flex-column gap-2 small"></div>
+          </div>
         </div>
       </div>
 
-      <div id="savedSection" class="mt-6 bg-white p-4 rounded-2xl shadow-md card">
-        <h4 class="font-semibold">Saved</h4>
-        <div id="savedList" class="mt-3"></div>
+      <div id="savedSection" class="card p-4 shadow-sm">
+        <h4 class="fw-semibold mb-3">Saved</h4>
+        <div id="savedList"></div>
       </div>
     </main>
 
-    <footer class="mt-8 text-center text-xs text-gray-500">
+    <footer class="text-center small text-secondary mt-4">
       INSTA BUZZ — static demo (mock data). Replace with live API for production.
     </footer>
   </div>
 
-  <!-- Mock data + JS -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- App JS -->
   <script>
     // ----- Mock feed data -----
     const MOCK_FEEDS = [
@@ -123,8 +183,8 @@
     const TRENDING = ['#AIArt', '#IndieGames', '#PortfolioTips'];
 
     // ----- App state -----
-    let selectedInterests = ['art']; // default
-    let bookmarks = []; // saved items
+    let selectedInterests = ['art'];
+    let bookmarks = [];
     let feed = [];
 
     // ----- DOM nodes -----
@@ -148,15 +208,19 @@
     function renderInterestsGrid() {
       interestsGrid.innerHTML = '';
       INTERESTS.forEach(i => {
+        const col = document.createElement('div');
+        col.className = 'col-sm-6 col-md-4';
+
         const btn = document.createElement('button');
-        btn.className = `flex items-center gap-3 p-3 rounded-xl border w-full text-left ${selectedInterests.includes(i.id) ? 'bg-yellow-100 border-yellow-300' : 'bg-white border-gray-200'}`;
-        btn.innerHTML = `<span class="text-xl">${i.emoji}</span>
-                         <div><div class="font-medium">${i.label}</div><div class="text-xs text-gray-500">Daily news, events & opportunities</div></div>`;
+        btn.className = `interest-btn ${selectedInterests.includes(i.id) ? 'active' : ''}`;
+        btn.innerHTML = `<span style="font-size: 1.5rem;">${i.emoji}</span>
+                         <div><div class="fw-medium">${i.label}</div><div class="small text-secondary">Daily news, events & opportunities</div></div>`;
         btn.onclick = () => {
           toggleInterest(i.id);
           renderInterestsGrid();
         }
-        interestsGrid.appendChild(btn);
+        col.appendChild(btn);
+        interestsGrid.appendChild(col);
       });
     }
 
@@ -177,23 +241,23 @@
       const visible = feed.filter(item => item.title.toLowerCase().includes(q) || item.summary.toLowerCase().includes(q));
       feedArea.innerHTML = '';
       if (visible.length === 0) {
-        feedArea.innerHTML = '<div class="text-sm text-gray-500">No updates yet — try different interests.</div>';
+        feedArea.innerHTML = '<div class="small text-secondary">No updates yet — try different interests.</div>';
         return;
       }
       visible.forEach(item => {
         const card = document.createElement('article');
-        card.className = 'p-3 border rounded-lg';
+        card.className = 'feed-card';
         card.innerHTML = `
-          <div class="flex justify-between">
+          <div class="d-flex justify-content-between">
             <div style="max-width:72%">
-              <h4 class="font-semibold">${item.title}</h4>
-              <div class="text-xs text-gray-500 mt-1">${item.source} • ${item.publishedAt}</div>
-              <p class="mt-2 text-sm text-gray-700">${item.summary}</p>
-              <div class="mt-3 flex gap-2">${item.tags.map(t => `<span class="text-xs px-2 py-1 bg-gray-100 rounded-full">${t}</span>`).join('')}</div>
+              <h4 class="fw-semibold fs-6 mb-1">${item.title}</h4>
+              <div class="small text-secondary mb-2">${item.source} • ${item.publishedAt}</div>
+              <p class="small mb-2">${item.summary}</p>
+              <div class="d-flex gap-2">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
             </div>
-            <div class="flex flex-col items-end gap-2">
-              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-sm underline">Open</a>
-              <button data-id="${item.id}" class="px-3 py-1 rounded-lg bg-yellow-100 text-sm saveBtn">Save</button>
+            <div class="d-flex flex-column align-items-end gap-2">
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="small">Open</a>
+              <button data-id="${item.id}" class="btn btn-sm btn-warning saveBtn">Save</button>
             </div>
           </div>
         `;
@@ -218,20 +282,20 @@
       savedCount.textContent = `${bookmarks.length} saved`;
       savedList.innerHTML = '';
       if (bookmarks.length === 0) {
-        savedList.innerHTML = '<div class="text-sm text-gray-500 mt-2">No saved items yet.</div>';
+        savedList.innerHTML = '<div class="small text-secondary mt-2">No saved items yet.</div>';
         return;
       }
       bookmarks.forEach(b => {
         const row = document.createElement('div');
-        row.className = 'mt-3 flex items-center justify-between';
+        row.className = 'd-flex justify-content-between align-items-center mb-3';
         row.innerHTML = `
           <div>
-            <div class="font-medium">${b.title}</div>
-            <div class="text-xs text-gray-500">${b.source}</div>
+            <div class="fw-medium">${b.title}</div>
+            <div class="small text-secondary">${b.source}</div>
           </div>
-          <div class="flex gap-2">
-            <a href="${b.url}" target="_blank" rel="noopener noreferrer" class="text-sm underline">Open</a>
-            <button data-id="${b.id}" class="px-3 py-1 rounded-lg bg-gray-100 text-sm removeBtn">Remove</button>
+          <div class="d-flex gap-2">
+            <a href="${b.url}" target="_blank" rel="noopener noreferrer" class="small">Open</a>
+            <button data-id="${b.id}" class="btn btn-sm btn-light removeBtn">Remove</button>
           </div>
         `;
         savedList.appendChild(row);
@@ -253,7 +317,6 @@
 
     // ----- Events -----
     startBtn.onclick = () => {
-      // if no interest selected, keep default
       if (selectedInterests.length === 0) selectedInterests = ['art'];
       onboardingEl.classList.add('hidden');
       homeEl.classList.remove('hidden');
