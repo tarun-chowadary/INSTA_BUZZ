@@ -97,11 +97,11 @@
   <script>
     // ----- Mock feed data -----
     const MOCK_FEEDS = [
-      { id: 'f1', title: 'Global Digital Art Expo 2025 opens virtual submissions', source: 'ArtWorld', url:'#', summary:'Virtual submissions for the Global Digital Art Expo 2025 are now open — explore categories, deadlines, and prize details.', tags:['exhibition','competition'], interest:'art', publishedAt:'2025-10-10' },
-      { id: 'f2', title: 'Top 10 indie games to watch this month', source: 'GamePulse', url:'#', summary:'From narrative-driven adventures to competitive roguelikes, here are indie titles making waves this month.', tags:['news','review'], interest:'gaming', publishedAt:'2025-10-12' },
-      { id: 'f3', title: 'AI-assisted sketches: workshops and scholarships announced', source: 'CreativeLab', url:'#', summary:'Workshops for artists combining traditional sketching with AI tools — scholarships available for early applicants.', tags:['workshop','opportunity'], interest:'art', publishedAt:'2025-10-08' },
-      { id: 'f4', title: 'Esports bootcamp: scholarships for rising players', source:'ProPlay', url:'#', summary:'A 6-week intensive bootcamp for competitive gamers with scholarship spots available.', tags:['opportunity'], interest:'gaming', publishedAt:'2025-09-30' },
-      { id: 'f5', title: 'Portfolio tips: how to present your digital art', source:'DesignDaily', url:'#', summary:'Pro tips for building an online portfolio that attracts galleries and clients.', tags:['advice'], interest:'art', publishedAt:'2025-10-02' }
+      { id: 'f1', title: 'Global Digital Art Expo 2025 opens virtual submissions', source: 'ArtWorld', url:'https://example.com/art-expo-2025', summary:'Virtual submissions for the Global Digital Art Expo 2025 are now open — explore categories, deadlines, and prize details.', tags:['exhibition','competition'], interest:'art', publishedAt:'2025-10-10' },
+      { id: 'f2', title: 'Top 10 indie games to watch this month', source: 'GamePulse', url:'https://example.com/indie-games-top-10', summary:'From narrative-driven adventures to competitive roguelikes, here are indie titles making waves this month.', tags:['news','review'], interest:'gaming', publishedAt:'2025-10-12' },
+      { id: 'f3', title: 'AI-assisted sketches: workshops and scholarships announced', source: 'CreativeLab', url:'https://example.com/ai-sketch-workshop', summary:'Workshops for artists combining traditional sketching with AI tools — scholarships available for early applicants.', tags:['workshop','opportunity'], interest:'art', publishedAt:'2025-10-08' },
+      { id: 'f4', title: 'Esports bootcamp: scholarships for rising players', source:'ProPlay', url:'https://example.com/esports-bootcamp', summary:'A 6-week intensive bootcamp for competitive gamers with scholarship spots available.', tags:['opportunity'], interest:'gaming', publishedAt:'2025-09-30' },
+      { id: 'f5', title: 'Portfolio tips: how to present your digital art', source:'DesignDaily', url:'https://example.com/portfolio-tips', summary:'Pro tips for building an online portfolio that attracts galleries and clients.', tags:['advice'], interest:'art', publishedAt:'2025-10-02' }
     ];
 
     const INTERESTS = [
@@ -192,7 +192,7 @@
               <div class="mt-3 flex gap-2">${item.tags.map(t => `<span class="text-xs px-2 py-1 bg-gray-100 rounded-full">${t}</span>`).join('')}</div>
             </div>
             <div class="flex flex-col items-end gap-2">
-              <a href="${item.url}" class="text-sm underline">Open</a>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-sm underline">Open</a>
               <button data-id="${item.id}" class="px-3 py-1 rounded-lg bg-yellow-100 text-sm saveBtn">Save</button>
             </div>
           </div>
@@ -230,7 +230,7 @@
             <div class="text-xs text-gray-500">${b.source}</div>
           </div>
           <div class="flex gap-2">
-            <a href="${b.url}" class="text-sm underline">Open</a>
+            <a href="${b.url}" target="_blank" rel="noopener noreferrer" class="text-sm underline">Open</a>
             <button data-id="${b.id}" class="px-3 py-1 rounded-lg bg-gray-100 text-sm removeBtn">Remove</button>
           </div>
         `;
